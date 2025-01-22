@@ -19,6 +19,13 @@ A full LSP-based extension will be developed as Nue further progresses as a prog
 
 Currently this extension works in Visual Studio Code and VSCodium, using either the extension provider of your choice or a generated `vsix` file.
 
+- [Visual Studio Marketplace (For Visual Studio Code)](https://marketplace.visualstudio.com/items?itemName=NueLanguage.nue-vscode)
+- [Open VSX (For VSCodium)](https://open-vsx.org/extension/NueLanguage/nue-vscode)
+<!--
+COMING SOON after CI has been set up, check IGNORE/TODO.md
+- [`.vsix` file from GitHub Releases](https://github.com/NueLanguage/vscode-extension/releases)
+-->
+
 ## Contributors
 <!--
     turn this into a wall of profile pictures later
