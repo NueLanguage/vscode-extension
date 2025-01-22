@@ -1,6 +1,6 @@
 # Change Log
 
-All notable changes to the "nue-vscode-support" extension will be documented in this file.
+All notable changes to the "nue-vscode" extension will be documented in this file.
 
 The date format in this document is `DD.MM.YYYY`.
 

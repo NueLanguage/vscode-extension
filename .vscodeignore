@@ -19,6 +19,7 @@
 
 !dist/**
 !package.json
+#!package-lock.json
 !README.md
 !CHANGELOG.md
 
@@ -26,6 +27,6 @@
 !language-configuration-uncommented.json
 
 !syntaxes/**
-!icons/**
+!images/**
 
 !LICENSE

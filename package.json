@@ -1,6 +1,6 @@
 {
-	"name": "nue-vscode-support",
-	"displayName": "Nue Language Support",
+	"name": "nue-vscode",
+	"displayName": "Nue",
 	"description": "An extension which adds support for the Nue Programming Language.",
 	"publisher": "NueLanguage",
 	"repository": {
@@ -60,7 +60,7 @@
 		],
 		"commands": [
 			{
-				"command": "nue-vscode-support.helloWorld",
+				"command": "nue-vscode.helloWorld",
 				"title": "Hello World"
 			}
 		],
