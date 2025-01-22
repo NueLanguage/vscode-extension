@@ -2,15 +2,7 @@
 	"name": "nue-vscode",
 	"displayName": "Nue",
 	"description": "An extension which adds support for the Nue Programming Language.",
-	"publisher": "NueLanguage",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/NueLanguage/vscode-extension.git"
-	},
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.95.0"
-	},
+	"license": "MIT",
 	"categories": [
 		"Programming Languages",
 		"Snippets"
@@ -22,6 +14,22 @@
 		"richy z",
 		"programming"
 	],
+	"galleryBanner": {
+		"theme": "dark"
+	},
+	"publisher": "NueLanguage",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/NueLanguage/vscode-extension.git"
+	},
+	"bugs": {
+		"url": "https://github.com/NueLanguage/vscode-extension/issues"
+	},
+	"homepage": "https://github.com/NueLanguage/vscode-extension",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.95.0"
+	},
 	"preview": true,
 	"extensionKind": [
 		"workspace",
