@@ -1,0 +1,14 @@
+{
+    "iconDefinitions": {
+        "nueIcon": {
+            "iconPath": "images/nue.png"
+        }
+    },
+
+    "fileExtensions": {
+        "nue": "nueIcon",
+        "nu": "nueIcon"
+    },
+
+    "languageIds": {}
+}

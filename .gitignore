@@ -1,0 +1,10 @@
+node_modules
+dist
+
+# macOS Files
+**.DS_Store
+**._*
+
+*.vsix
+
+OLD

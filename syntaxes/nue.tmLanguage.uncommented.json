@@ -1,0 +1,152 @@
+{
+    "name": "Nue",
+    "scopeName": "source.nue",
+    "patterns": [
+        { "include": "#comments" },
+        { "include": "#strings" },
+        { "include": "#numbers" },
+        { "include": "#keywords" },
+        { "include": "#types" },
+        { "include": "#operators" },
+        { "include": "#punctuation" },
+        { "include": "#function-calls" },
+        { "include": "#identifiers" }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "begin": "//#",
+                    "end": "#//",
+                    "name": "comment.block.nue",
+                    "patterns": [
+                        {
+                            "match": "\\n",
+                            "name": "comment.block.nue"
+                        }
+                    ]
+                },
+                {
+                    "match": "//.*$",
+                    "name": "comment.line.double-slash.nue"
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "begin": "(\"\"\")",
+                    "beginCaptures": { "0": { "name": "punctuation.definition.string.begin.nue" } },
+                    "end": "(\"\"\")",
+                    "endCaptures": { "0": { "name": "punctuation.definition.string.end.nue" } },
+                    "name": "string.quoted.triple.nue",
+                    "patterns": [
+                        {
+                            "match": "\\\\.",
+                            "name": "constant.character.escape.nue"
+                        }
+                    ]
+                },
+                {
+                    "begin": "(''')",
+                    "beginCaptures": { "0": { "name": "punctuation.definition.string.begin.nue" } },
+                    "end": "(''')",
+                    "endCaptures": { "0": { "name": "punctuation.definition.string.end.nue" } },
+                    "name": "string.quoted.triple.single.nue",
+                    "patterns": [
+                        {
+                            "match": "\\\\.",
+                            "name": "constant.character.escape.nue"
+                        }
+                    ]
+                },
+                {
+                    "begin": "\"",
+                    "beginCaptures": { "0": { "name": "punctuation.definition.string.begin.nue" } },
+                    "end": "\"",
+                    "endCaptures": { "0": { "name": "punctuation.definition.string.end.nue" } },
+                    "name": "string.quoted.double.nue",
+                    "patterns": [
+                        {
+                            "match": "\\\\.",
+                            "name": "constant.character.escape.nue"
+                        }
+                    ]
+                },
+                {
+                    "begin": "'",
+                    "beginCaptures": { "0": { "name": "punctuation.definition.string.begin.nue" } },
+                    "end": "'",
+                    "endCaptures": { "0": { "name": "punctuation.definition.string.end.nue" } },
+                    "name": "string.quoted.single.nue",
+                    "patterns": [
+                        {
+                            "match": "\\\\.",
+                            "name": "constant.character.escape.nue"
+                        }
+                    ]
+                }
+            ]
+        },
+        "numbers": {
+            "patterns": [
+                {
+                    "match": "\\b(?:0[xX][0-9A-Fa-f_]+|0[bB][01_]+|0[oO][0-7_]+|[0-9][0-9_]*(?:\\.[0-9_]+)?(?:[eE][+-]?[0-9_]+)?)(?![A-Za-z_])",
+                    "name": "constant.numeric.nue"
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "match": "\\b(?:private|var|alias|if|else|for|in|step|while|continue|break|return|this|match|case|function)\\b",
+                    "name": "keyword.control.nue"
+                },
+                {
+                    "match": "\\b(?:true|false)\\b",
+                    "name": "constant.boolean.nue"
+                }
+            ]
+        },
+        "types": {
+            "patterns": [
+                {
+                    "match": "\\b(?:table|boolean|number|string|any|void|null)\\b",
+                    "name": "storage.type.nue"
+                }
+            ]
+        },
+        "operators": {
+            "patterns": [
+                {
+                    "match": "(\\+\\+|\\-\\-|\\+=|\\-=|\\*=|/=|\\^=|==|!=|<=|>=|\\|\\||->|\\.{2,3}|\\^|\\+|\\-|\\*|/|%|\\\\|=|<|>|!|&|\\||#|\\?)",
+                    "name": "keyword.operator.nue"
+                }
+            ]
+        },
+        "punctuation": {
+            "patterns": [
+                {
+                    "match": "[(){}\\[\\],;.]",
+                    "name": "punctuation.definition.nue"
+                }
+            ]
+        },
+        "function-calls": {
+            "patterns": [
+                {
+                    "match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\s*(?=\\()",
+                    "name": "entity.name.function.call.nue"
+                }
+            ]
+        },
+        "identifiers": {
+            "patterns": [
+                {
+                    "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b",
+                    "name": "variable.other.nue"
+                }
+            ]
+        }
+    }
+}
