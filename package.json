@@ -2,7 +2,8 @@
 	"name": "nue-vscode",
 	"displayName": "Nue",
 	"description": "Syntax highlighting and basic editing support for Nue.",
-	"version": "0.1.0",
+	"icon": "images/nue.png",
+	"version": "0.2.0",
 	"publisher": "NueLanguage",
 	"license": "MIT",
 	"engines": {

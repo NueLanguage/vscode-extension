@@ -4,5 +4,7 @@
 !CHANGELOG.md
 !LICENSE
 !language-configuration.json
+!images/
+!images/nue.png
 !syntaxes/
 !syntaxes/nue.tmLanguage.json
