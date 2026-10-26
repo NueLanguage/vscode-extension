@@ -1,0 +1,72 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  package:
+    name: Test and package
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      vsix: ${{ steps.version.outputs.vsix }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Check release version
+        id: version
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync, appendFileSync } from 'node:fs';
+          const { name, version } = JSON.parse(readFileSync('package.json', 'utf8'));
+          if (!/^\d+\.\d+\.\d+$/.test(version) || process.env.GITHUB_REF_NAME !== `v${version}`) {
+            throw new Error(`Release tag must be v${version}, matching a stable package.json version`);
+          }
+          appendFileSync(process.env.GITHUB_OUTPUT, `vsix=${name}-${version}.vsix\n`);
+          NODE
+      - run: npm ci
+      - name: Test and build VSIX
+        run: npm run package
+      - name: Upload VSIX artefact
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ steps.version.outputs.vsix }}
+          path: ${{ steps.version.outputs.vsix }}
+          if-no-files-found: error
+          retention-days: 90
+
+  publish:
+    name: Publish to Open VSX
+    needs: package
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - name: Download tested VSIX
+        uses: actions/download-artifact@v7
+        with:
+          name: ${{ needs.package.outputs.vsix }}
+          path: release
+      - name: Publish with trusted publishing
+        env:
+          VSIX: release/${{ needs.package.outputs.vsix }}
+        run: npx --yes ovsx@1.3.0 publish "$VSIX" --trusted-publishing

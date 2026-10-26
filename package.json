@@ -49,7 +49,7 @@
 	},
 	"scripts": {
 		"test": "node --test test/grammar.test.mjs",
-		"package": "npm test && npx --yes @vscode/vsce@4.0.0 package --out nue-vscode-0.1.0.vsix"
+		"package": "npm test && npx --yes @vscode/vsce@4.0.0 package"
 	},
 	"devDependencies": {
 		"vscode-oniguruma": "2.0.1",
