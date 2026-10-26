@@ -1,9 +1,9 @@
 {
 	"name": "nue-vscode",
 	"displayName": "Nue",
-	"description": "Syntax highlighting and basic editing support for Nue.",
+	"description": "Syntax highlighting and formatting support for Nue.",
 	"icon": "images/nue.png",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"publisher": "NueLanguage",
 	"license": "MIT",
 	"engines": {
@@ -26,7 +26,34 @@
 	},
 	"homepage": "https://github.com/NueLanguage/vscode-extension",
 	"preview": true,
+	"main": "./src/extension.cjs",
+	"extensionKind": [
+		"workspace"
+	],
+	"activationEvents": [
+		"onLanguage:nue"
+	],
+	"capabilities": {
+		"untrustedWorkspaces": {
+			"supported": "limited",
+			"description": "Highlighting is available, but running Nue to format documents requires a trusted workspace.",
+			"restrictedConfigurations": [
+				"nue.executablePath"
+			]
+		}
+	},
 	"contributes": {
+		"configuration": {
+			"title": "Nue",
+			"properties": {
+				"nue.executablePath": {
+					"type": "string",
+					"default": "",
+					"scope": "machine-overridable",
+					"description": "Path to a prebuilt Nue executable supporting fmt. If empty, use nue from PATH on the extension host. An absolute path should probably be used."
+				}
+			}
+		},
 		"languages": [
 			{
 				"id": "nue",
@@ -49,7 +76,8 @@
 		]
 	},
 	"scripts": {
-		"test": "node --test test/grammar.test.mjs",
+		"test": "node --test test/*.test.mjs",
+		"test:editor": "node test/run-editor.mjs",
 		"package": "npm test && npx --yes @vscode/vsce@4.0.0 package"
 	},
 	"devDependencies": {

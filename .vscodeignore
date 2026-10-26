@@ -8,3 +8,5 @@
 !images/nue.png
 !syntaxes/
 !syntaxes/nue.tmLanguage.json
+!src/
+!src/*.cjs

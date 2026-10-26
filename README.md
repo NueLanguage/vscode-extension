@@ -1,8 +1,26 @@
 # Nue for Visual Studio Code
 
-Syntax highlighting and basic editing support for the current Nue language.
+Syntax highlighting and formatting support for the current Nue language.
 
 Literally do not expect anything else from this extension at the moment.
+
+## Formatting
+
+The extension looks for
+`nue` on the extension host's PATH unless `nue.executablePath` overrides it.
+
+```json
+{
+ "nue.executablePath": "/absolute/path/to/nue",
+ "[nue]": {
+  "editor.defaultFormatter": "NueLanguage.nue-vscode",
+  "editor.formatOnSave": true
+ }
+}
+```
+
+For Remote SSH or containers, the executable
+must be available on that workspace's extension host.
 
 ## Preview
 
@@ -25,7 +43,7 @@ npm run package
 Packaging creates a vsix file, which can be installed with **Extensions: Install from VSIX...**, or:
 
 ```sh
-code --install-extension ./nue-vscode-0.1.0.vsix
+code --install-extension ./nue-vscode-a.b.c.vsix
 ```
 
 Optionally check tokenisation against a Nue compiler checkout:
@@ -35,3 +53,7 @@ NUE_SOURCE_ROOT=/path/to/nue npm test
 ```
 
 This reads its examples and standard packages; it does not execute their code.
+
+Set `NUE_EXECUTABLE` to enable the optional real compiler process check in `npm test`.
+For the full editor check, set it along with `VSCODE_EXECUTABLE` (the VS Code
+application executable) and run `npm run test:editor`.
