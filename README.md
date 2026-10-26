@@ -1,37 +1,37 @@
-# 🍑 Nue Language Support for Visual Studio Code
+# Nue for Visual Studio Code
 
-***Experiencing Nue for the first time just got a whole lot better.***
+Syntax highlighting and basic editing support for the current Nue language.
 
-An extension for Visual Studio Code which adds syntax highlighting, file associations, code recognition and a few other features like icons to support the Nue programming language.
+Literally do not expect anything else from this extension at the moment.
 
-![Extension showcase](./README-assets/features.png)
+## Preview
 
-At the moment, this extension adds weak support for Nue using TextMate grammars and other configurations.
+Open this repository in VS Code and press F5 to launch **Preview Nue highlighting**.
+The development window opens the representative Nue source example.
 
-A full LSP-based extension will be developed as Nue further progresses as a programming language in development.
+Use **Developer: Inspect Editor Tokens and Scopes** to inspect the grammar scopes
+and the colours chosen by your current theme.
 
-## Features
+## Check and package
 
-- 🌈 Code highlighting
-- ✨ Experimental code formatting
+Development checks use Node.js 22 or newer:
 
-## Installation
+```sh
+npm ci
+npm test
+npm run package
+```
 
-Currently this extension works in Visual Studio Code and VSCodium, using either the extension provider of your choice or a generated `vsix` file.
+Packaging creates a vsix file, which can be installed with **Extensions: Install from VSIX...**, or:
 
-- [Visual Studio Marketplace (For Visual Studio Code)](https://marketplace.visualstudio.com/items?itemName=NueLanguage.nue-vscode)
-- [Open VSX (For VSCodium)](https://open-vsx.org/extension/NueLanguage/nue-vscode)
-<!--
-COMING SOON after CI has been set up, check IGNORE/TODO.md
-- [`.vsix` file from GitHub Releases](https://github.com/NueLanguage/vscode-extension/releases)
--->
+```sh
+code --install-extension ./nue-vscode-0.1.0.vsix
+```
 
-## Contributors
-<!--
-    turn this into a wall of profile pictures later
--->
-- [@Richy-Z](https://github.com/Richy-Z)
+Optionally check tokenisation against a Nue compiler checkout:
 
-## License
+```sh
+NUE_SOURCE_ROOT=/path/to/nue npm test
+```
 
-The Nue extension for Visual Studio code is licensed under the MIT license, as of 22.01.2024.
+This reads its examples and standard packages; it does not execute their code.

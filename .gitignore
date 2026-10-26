@@ -1,10 +1,4 @@
-node_modules
-dist
-
-# macOS Files
-**.DS_Store
-**._*
-
+node_modules/
 *.vsix
-
-IGNORE
+.DS_Store
+._*

@@ -1,19 +1,6 @@
-# Change Log
+# Changelog
 
-All notable changes to the "nue-vscode" extension will be documented in this file.
+## 0.1.0
 
-The date format in this document is `DD.MM.YYYY`.
-
-<!--
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
-
--->
-
-# 0.0.1
-`22.01.2024`
-
-- Initial release with repository cleanup and configuration completion
+- Removed literally all the old 0.0.1 stuff, before Nue was actually implemented as a language
+- Syntax highlighting for the current form of nue

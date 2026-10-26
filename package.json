@@ -1,23 +1,21 @@
 {
 	"name": "nue-vscode",
 	"displayName": "Nue",
-	"description": "An extension which adds support for the Nue Programming Language.",
+	"description": "Syntax highlighting and basic editing support for Nue.",
+	"version": "0.1.0",
+	"publisher": "NueLanguage",
 	"license": "MIT",
+	"engines": {
+		"vscode": "^1.95.0"
+	},
 	"categories": [
-		"Programming Languages",
-		"Snippets"
+		"Programming Languages"
 	],
 	"keywords": [
 		"nue",
-		"nue.nu",
 		"numelon",
-		"richy z",
-		"programming"
+		"programming language"
 	],
-	"galleryBanner": {
-		"theme": "dark"
-	},
-	"publisher": "NueLanguage",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/NueLanguage/vscode-extension.git"
@@ -26,18 +24,7 @@
 		"url": "https://github.com/NueLanguage/vscode-extension/issues"
 	},
 	"homepage": "https://github.com/NueLanguage/vscode-extension",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.95.0"
-	},
 	"preview": true,
-	"extensionKind": [
-		"workspace",
-		"ui"
-	],
-	"icon": "images/nue.png",
-	"activationEvents": [],
-	"main": "dist/extension.js",
 	"contributes": {
 		"languages": [
 			{
@@ -47,67 +34,25 @@
 					"nue"
 				],
 				"extensions": [
-					".nue",
-					".nu"
+					".nue"
 				],
-				"configuration": "language-configuration-uncommented.json"
-			}
-		],
-		"files": [
-			{
-				"language": "nue",
-				"scheme": "source.nue"
+				"configuration": "./language-configuration.json"
 			}
 		],
 		"grammars": [
 			{
 				"language": "nue",
 				"scopeName": "source.nue",
-				"path": "syntaxes/nue.tmLanguage.uncommented.json"
-			}
-		],
-		"commands": [
-			{
-				"command": "nue-vscode.helloWorld",
-				"title": "Hello World"
-			}
-		],
-		"iconThemes": [
-			{
-				"id": "nue-icon-theme",
-				"label": "Nue Icon Theme",
-				"path": "file-icon-theme.json"
+				"path": "./syntaxes/nue.tmLanguage.json"
 			}
 		]
 	},
 	"scripts": {
-		"vscode:prepublish": "npm run package",
-		"compile": "npm run check-types && npm run lint && node esbuild.js",
-		"watch": "npm-run-all -p watch:*",
-		"watch:esbuild": "node esbuild.js --watch",
-		"watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
-		"package": "npm run check-types && npm run lint && node esbuild.js --production",
-		"compile-tests": "tsc -p . --outDir out",
-		"watch-tests": "tsc -p . -w --outDir out",
-		"pretest": "npm run compile-tests && npm run compile && npm run lint",
-		"check-types": "tsc --noEmit",
-		"lint": "eslint src",
-		"test": "vscode-test"
+		"test": "node --test test/grammar.test.mjs",
+		"package": "npm test && npx --yes @vscode/vsce@4.0.0 package --out nue-vscode-0.1.0.vsix"
 	},
 	"devDependencies": {
-		"@types/mocha": "^10.0.10",
-		"@types/node": "20.x",
-		"@types/vscode": "^1.95.0",
-		"@typescript-eslint/eslint-plugin": "^8.17.0",
-		"@typescript-eslint/parser": "^8.17.0",
-		"@vscode/test-cli": "^0.0.10",
-		"@vscode/test-electron": "^2.4.1",
-		"esbuild": "^0.24.0",
-		"eslint": "^9.16.0",
-		"npm-run-all": "^4.1.5",
-		"typescript": "^5.7.2"
-	},
-	"dependencies": {
-		"vsce": "^2.15.0"
+		"vscode-oniguruma": "2.0.1",
+		"vscode-textmate": "9.3.2"
 	}
 }

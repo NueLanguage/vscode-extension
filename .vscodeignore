@@ -1,32 +1,8 @@
-*
-*/**
-**/.DS_Store
-
-# .vscode/**
-# .vscode-test/**
-# out/**
-# node_modules/**
-# src/**
-# .gitignore
-# .yarnrc
-# esbuild.js
-# vsc-extension-quickstart.md
-# **/tsconfig.json
-# **/eslint.config.mjs
-# **/*.map
-# **/*.ts
-# **/.vscode-test.*
-
-!dist/**
+**
 !package.json
-#!package-lock.json
 !README.md
 !CHANGELOG.md
-
-!file-icon-theme.json
-!language-configuration-uncommented.json
-
-!syntaxes/**
-!images/**
-
 !LICENSE
+!language-configuration.json
+!syntaxes/
+!syntaxes/nue.tmLanguage.json

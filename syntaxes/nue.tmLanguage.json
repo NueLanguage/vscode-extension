@@ -1,0 +1,352 @@
+{
+	"name": "Nue",
+	"scopeName": "source.nue",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#attributes"
+		},
+		{
+			"include": "#declarations"
+		},
+		{
+			"include": "#headers"
+		},
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#types"
+		},
+		{
+			"include": "#builtins"
+		},
+		{
+			"include": "#calls"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#punctuation"
+		}
+	],
+	"repository": {
+		"comments": {
+			"patterns": [
+				{
+					"begin": "^\\s*(//)(nue:build)\\b",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.definition.comment.nue"
+						},
+						"2": {
+							"name": "keyword.control.directive.nue"
+						}
+					},
+					"end": "$",
+					"name": "comment.line.double-slash.nue",
+					"patterns": [
+						{
+							"match": "&&|\\|\\||!",
+							"name": "keyword.operator.logical.nue"
+						}
+					]
+				},
+				{
+					"begin": "/\\*",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.begin.nue"
+						}
+					},
+					"end": "\\*/",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.end.nue"
+						}
+					},
+					"name": "comment.block.nue"
+				},
+				{
+					"begin": "//",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.nue"
+						}
+					},
+					"end": "$",
+					"name": "comment.line.double-slash.nue"
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"begin": "\"",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.nue"
+						}
+					},
+					"end": "\"|$",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.nue"
+						}
+					},
+					"name": "string.quoted.double.nue",
+					"patterns": [
+						{
+							"include": "#escapes"
+						}
+					]
+				},
+				{
+					"begin": "'",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.begin.nue"
+						}
+					},
+					"end": "'|$",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.nue"
+						}
+					},
+					"name": "string.quoted.single.nue",
+					"patterns": [
+						{
+							"include": "#escapes"
+						}
+					]
+				}
+			]
+		},
+		"escapes": {
+			"patterns": [
+				{
+					"match": "\\\\(?:[\\\\\"'nrt0]|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})",
+					"name": "constant.character.escape.nue"
+				},
+				{
+					"match": "\\\\(?:.|$)",
+					"name": "invalid.illegal.escape.nue"
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"match": "\\b0[xX][0-9A-Fa-f](?:_?[0-9A-Fa-f])*(?![A-Za-z0-9_])",
+					"name": "constant.numeric.integer.hexadecimal.nue"
+				},
+				{
+					"match": "\\b0[bB][01](?:_?[01])*(?![A-Za-z0-9_])",
+					"name": "constant.numeric.integer.binary.nue"
+				},
+				{
+					"match": "\\b0[oO][0-7](?:_?[0-7])*(?![A-Za-z0-9_])",
+					"name": "constant.numeric.integer.octal.nue"
+				},
+				{
+					"match": "\\b[0-9](?:_?[0-9])*(?:\\.(?!\\.)(?:[0-9](?:_?[0-9])*)?)?(?:[eE][+-]?[0-9](?:_?[0-9])*)?(?![A-Za-z0-9_])",
+					"name": "constant.numeric.decimal.nue"
+				}
+			]
+		},
+		"attributes": {
+			"patterns": [
+				{
+					"match": "(@)([A-Za-z_][A-Za-z0-9_]*)",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.annotation.nue"
+						},
+						"2": {
+							"name": "storage.type.annotation.nue"
+						}
+					}
+				}
+			]
+		},
+		"declarations": {
+			"patterns": [
+				{
+					"match": "\\b(func)\\s+(?:(\\([^\\r\\n)]*\\))\\s*)?([A-Za-z_][A-Za-z0-9_]*)(?=\\s*(?:\\[[^\\]\\r\\n]*\\]\\s*)?\\()",
+					"captures": {
+						"1": {
+							"name": "storage.type.function.nue"
+						},
+						"2": {
+							"name": "meta.function.receiver.nue",
+							"patterns": [
+								{
+									"include": "#types"
+								},
+								{
+									"include": "#operators"
+								},
+								{
+									"include": "#punctuation"
+								}
+							]
+						},
+						"3": {
+							"name": "entity.name.function.nue"
+						}
+					}
+				},
+				{
+					"match": "\\b(type)\\s+([A-Za-z_][A-Za-z0-9_]*)",
+					"captures": {
+						"1": {
+							"name": "storage.type.nue"
+						},
+						"2": {
+							"name": "entity.name.type.nue"
+						}
+					}
+				}
+			]
+		},
+		"headers": {
+			"patterns": [
+				{
+					"begin": "\\b(from)\\s*(<)",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.other.import.nue"
+						},
+						"2": {
+							"name": "punctuation.definition.string.begin.nue"
+						}
+					},
+					"end": ">|$",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.string.end.nue"
+						}
+					},
+					"name": "meta.import.header.nue",
+					"contentName": "string.unquoted.header.nue"
+				}
+			]
+		},
+		"keywords": {
+			"patterns": [
+				{
+					"match": "\\b(?:true|false)\\b",
+					"name": "constant.language.boolean.nue"
+				},
+				{
+					"match": "\\bnil\\b",
+					"name": "constant.language.null.nue"
+				},
+				{
+					"match": "\\b(?:if|else|switch|case|default|for|in|range|step|break|continue|return|defer)\\b",
+					"name": "keyword.control.nue"
+				},
+				{
+					"match": "\\b(?:package|import|from)\\b",
+					"name": "keyword.other.import.nue"
+				},
+				{
+					"match": "\\bextern\\b",
+					"name": "storage.modifier.nue"
+				},
+				{
+					"match": "\\b(?:type|struct|union|enum|view|func|var|const)\\b",
+					"name": "storage.type.nue"
+				},
+				{
+					"match": "\\b(?:as|at)\\b",
+					"name": "keyword.operator.word.nue"
+				}
+			]
+		},
+		"types": {
+			"patterns": [
+				{
+					"match": "(?<![A-Za-z0-9_.])\\b(?:void|bool|int|uint|uintptr|int8|int16|int32|int64|uint8|uint16|uint32|uint64|float32|float64|rune|string|error|comparable|mmio)\\b",
+					"name": "support.type.builtin.nue"
+				},
+				{
+					"match": "\\b(c)(\\.)(Char|SChar|UChar|Short|UShort|Int|UInt|Long|ULong|LongLong|ULongLong|Size|PtrDiff|Float|Double|LongDouble)\\b",
+					"captures": {
+						"1": {
+							"name": "entity.name.namespace.nue"
+						},
+						"2": {
+							"name": "punctuation.accessor.nue"
+						},
+						"3": {
+							"name": "support.type.builtin.c.nue"
+						}
+					}
+				}
+			]
+		},
+		"builtins": {
+			"patterns": [
+				{
+					"match": "(?<![A-Za-z0-9_.])\\b(?:print|panic|alloc|free|realloc|cstring|len|cap|copy|append|sizeof|alignof|offsetof)\\b(?=\\s*\\()",
+					"name": "support.function.builtin.nue"
+				}
+			]
+		},
+		"calls": {
+			"patterns": [
+				{
+					"match": "\\b[A-Za-z_][A-Za-z0-9_]*(?=\\s*(?:\\[(?:[^\\[\\]\\r\\n]|\\[(?:[^\\[\\]\\r\\n]|\\[[^\\[\\]\\r\\n]*\\])*\\])*\\]\\s*)?\\()",
+					"name": "entity.name.function.call.nue"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"match": "\\.\\.",
+					"name": "keyword.operator.range.nue"
+				},
+				{
+					"match": ":=|==|!=|<=|>=|&&|\\|\\||<<|>>|\\+\\+|--|[+\\-*/%]=?|[=<>!&|^~]",
+					"name": "keyword.operator.nue"
+				}
+			]
+		},
+		"punctuation": {
+			"patterns": [
+				{
+					"match": "[{}]",
+					"name": "punctuation.section.block.nue"
+				},
+				{
+					"match": "[\\[\\]]",
+					"name": "punctuation.section.brackets.nue"
+				},
+				{
+					"match": "[()]",
+					"name": "punctuation.section.parens.nue"
+				},
+				{
+					"match": "[,:;]",
+					"name": "punctuation.separator.nue"
+				},
+				{
+					"match": "\\.",
+					"name": "punctuation.accessor.nue"
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,70 @@
+//nue:build (darwin || linux) && (hosted || foreign_host)
+
+package preview
+
+import "fmt"
+
+/* Block comments do not nest.
+   func thisIsNotCode() {}
+*/
+
+type Integer = int | int32 | uint64
+type Transform[T] func(value T) T
+type Buffer[T] struct { values []T; }
+
+type Status enum uint8 {
+	Ready
+	Busy
+}
+
+type Storage union {
+	integer uint64
+	decimal float64
+}
+
+type Registers view {
+	command mmio[uint16] @write at 0x00
+	status mmio[uint16] @read at 0x04
+}
+
+extern c from <stdio.h> {
+	type File @cname("FILE")
+	func Close(file *File) c.Int @cname("fclose")
+}
+
+func Identity[T](value T) T { return value }
+
+func (buffer *Buffer[T]) Len() int {
+	return len(buffer.values)
+}
+
+func ReadStatus(address uintptr) uint16 {
+	registers := Registers at address
+	return registers.status
+}
+
+func main() int {
+	const mask uint32 = 0b1010_0101
+	var octal uint32 = 0o755
+	var exponent float64 = 1.25e-3
+	var character rune = '\u03BB'
+	var absent error
+	var callback Transform[int] = Identity[int]
+	values := alloc([]uint16, 8)
+	defer free(values)
+	for i in range 0..7 step 1 {
+		values[i] = i as uint16
+	}
+	last := callback(7)
+	bits := mask & ~octal ^ 0xFF
+	text := "Hello, \"Nue\"!\n// still a string"
+	fmt.Println(text, character, exponent, last, bits, sizeof(uintptr))
+	switch {
+	case absent != nil:
+		panic("unexpected error")
+	case true && !false:
+		return 0
+	default:
+		return 1
+	}
+}
